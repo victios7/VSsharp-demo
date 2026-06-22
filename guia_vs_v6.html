@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guía Completa VS# v6.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--or:#FF8C00;--bg:#0d0d0d;--bg2:#111;--bd:#2a2a2a;--tx:#ccc;--gr:#7ec68a;--cy:#00BFFF}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Comic Neue',cursive;background:var(--bg);color:#fff;line-height:1.6}
+header{background:linear-gradient(135deg,var(--or),#b06000);padding:24px 32px;border-bottom:3px solid #000}
+header h1{font-family:'Bangers',cursive;font-size:42px;letter-spacing:4px;color:#111}
+header p{color:#111;margin-top:6px;font-size:15px}
+nav{position:sticky;top:0;background:var(--bg2);border-bottom:2px solid var(--bd);padding:10px 20px;display:flex;flex-wrap:wrap;gap:6px;z-index:10}
+nav a{color:var(--or);text-decoration:none;font-family:'Bangers',cursive;font-size:12px;padding:4px 10px;border:1px solid var(--bd);border-radius:8px}
+nav a:hover{background:rgba(255,140,0,.15)}
+main{max-width:960px;margin:0 auto;padding:24px 20px 80px}
+section{margin-bottom:36px}
+h2{font-family:'Bangers',cursive;color:var(--or);font-size:26px;letter-spacing:2px;margin-bottom:12px;padding-bottom:6px;border-bottom:2px solid var(--bd)}
+.fn{display:flex;gap:12px;padding:6px 10px;margin:2px 0;border-radius:6px;font-size:13px}
+.fn:hover{background:rgba(255,140,0,.06)}
+.fn code{flex:0 0 42%;color:var(--cy);font-family:'Courier New',monospace;font-size:12px;background:#0a0a0a;padding:3px 8px;border-radius:5px;border:1px solid #222}
+.fn span{color:var(--tx);flex:1}
+.stats{background:var(--bg2);border:2px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:24px;display:flex;gap:24px;flex-wrap:wrap}
+.stat{font-family:'Bangers',cursive;font-size:28px;color:var(--gr)}
+.stat small{display:block;font-size:11px;color:#666;font-family:'Comic Neue',cursive}
+.rules{background:#1a1000;border:2px solid var(--or);border-radius:12px;padding:16px;margin-bottom:24px}
+.rules h3{font-family:'Bangers',cursive;color:var(--or);margin-bottom:8px}
+</style>
+</head>
+<body>
+<header>
+<h1>VS# v6.0 — Guía Completa</h1>
+<p>Lenguaje completo con sintaxis española — paridad con Python y memoria estilo C++</p>
+</header>
+<nav>
+<a href="#fundamentos">Fundamentos</a>
+<a href="#control-de-flujo">Control de flujo</a>
+<a href="#oop-y-tipos">OOP y tipos</a>
+<a href="#memoria-estilo-c++">Memoria (estilo C++)</a>
+<a href="#hilos-y-concurrencia">Hilos y concurrencia</a>
+<a href="#iteradores-y-generadores">Iteradores y generadores</a>
+<a href="#reflexión-y-tipos">Reflexión y tipos</a>
+<a href="#matematicas-mat">matematicas (mat)</a>
+<a href="#texto-texto">Texto (texto)</a>
+<a href="#listas-lista">Listas (lista)</a>
+<a href="#mapas-mapa">Mapas (mapa)</a>
+<a href="#conjuntos,-pilas,-colas">Conjuntos, pilas, colas</a>
+<a href="#numeros-numero">Numeros (numero)</a>
+<a href="#archivos-archivo">Archivos (archivo)</a>
+<a href="#red-red">Red (red)</a>
+<a href="#tiempo-tiempo">Tiempo (tiempo)</a>
+<a href="#cripto-y-hash">Cripto y hash</a>
+<a href="#serialización">Serialización</a>
+<a href="#ui-y-ventanas">UI y ventanas</a>
+<a href="#gráficos-y-3d">Gráficos y 3D</a>
+<a href="#sistema-sistema">Sistema (sistema)</a>
+<a href="#rutas-ruta">Rutas (ruta)</a>
+<a href="#compresión-y-xml">Compresión y XML</a>
+<a href="#pruebas-prueba">Pruebas (prueba)</a>
+<a href="#matriz-y-arreglo">Matriz y arreglo</a>
+<a href="#grafos">Grafos</a>
+<a href="#regex-y-validación">Regex y validación</a>
+<a href="#ia">IA</a>
+<a href="#eventos">Eventos</a>
+<a href="#avanzado">Avanzado</a>
+</nav>
+<main>
+<div class="rules">
+<h3>Reglas de sintaxis VS#</h3>
+<p>Solo usa <strong>=</strong> para asignar, <strong>"comillas"</strong> para textos y <strong>#</strong> para comentarios. Palabras clave en español. Bloques indentados terminan con <code>terminar</code>. Todo programa empieza con <code>vs#</code>.</p>
+</div>
+<div class="stats">
+<div class="stat">374<small>funciones documentadas</small></div>
+<div class="stat">30<small>módulos / categorías</small></div>
+<div class="stat">v6.0<small>versión del lenguaje</small></div></div>
+<section id="fundamentos"><h2>Fundamentos</h2>
+<div class="fn"><code>vs#</code><span>Cabecera obligatoria de todo programa</span></div>
+<div class="fn"><code>variable x = valor</code><span>Declarar variable mutable</span></div>
+<div class="fn"><code>constante PI = 3.14</code><span>Constante inmutable</span></div>
+<div class="fn"><code>variable global x = 0</code><span>Variable global</span></div>
+<div class="fn"><code>asignar x valor</code><span>Reasignar</span></div>
+<div class="fn"><code>concatenar x "texto"</code><span>Concatenar a string</span></div>
+<div class="fn"><code>mostrar "texto"</code><span>Imprimir</span></div>
+<div class="fn"><code>mostrar color "rojo" "msg"</code><span>Imprimir con color</span></div>
+<div class="fn"><code>leer "prompt"</code><span>Entrada modal</span></div>
+<div class="fn"><code>leer consola "prompt"</code><span>Entrada consola IDE</span></div>
+<div class="fn"><code>definir funcion f a b</code><span>Definir función</span></div>
+<div class="fn"><code>retornar valor</code><span>Retornar de función</span></div>
+<div class="fn"><code>funcion con a b</code><span>Lambda / función anónima</span></div>
+</section>
+<section id="control-de-flujo"><h2>Control de flujo</h2>
+<div class="fn"><code>cuando cond ... terminar</code><span>If</span></div>
+<div class="fn"><code>cuando cond ... sino ... terminar</code><span>If-else</span></div>
+<div class="fn"><code>elegir x caso "A" ... por defecto ... terminar</code><span>Switch</span></div>
+<div class="fn"><code>si x mayor 0 entonces "a" sino "b"</code><span>Ternario</span></div>
+<div class="fn"><code>mientras cond ... terminar</code><span>While</span></div>
+<div class="fn"><code>para i desde 1 hasta 10 paso 1</code><span>For numérico</span></div>
+<div class="fn"><code>para cada item en lista</code><span>For-each</span></div>
+<div class="fn"><code>repetir 5 veces</code><span>Repetir N</span></div>
+<div class="fn"><code>repetir siempre</code><span>Loop infinito</span></div>
+<div class="fn"><code>detener</code><span>Break</span></div>
+<div class="fn"><code>saltar</code><span>Continue</span></div>
+<div class="fn"><code>intentar ... capturar e ... terminar</code><span>Try-catch</span></div>
+<div class="fn"><code>lanzar error "TIPO" "msg"</code><span>Throw tipado</span></div>
+</section>
+<section id="oop-y-tipos"><h2>OOP y tipos</h2>
+<div class="fn"><code>clase Nombre ... terminar</code><span>Clase</span></div>
+<div class="fn"><code>clase Hijo heredar Padre</code><span>Herencia</span></div>
+<div class="fn"><code>propio campo = valor</code><span>Campo de instancia</span></div>
+<div class="fn"><code>metodo nombre con a b</code><span>Método</span></div>
+<div class="fn"><code>super metodo</code><span>Llamada al padre</span></div>
+<div class="fn"><code>nuevo Clase arg1 arg2</code><span>Constructor</span></div>
+<div class="fn"><code>estructura Punto x y</code><span>Struct/record</span></div>
+<div class="fn"><code>enum Estado activo inactivo terminar</code><span>Enumeración</span></div>
+<div class="fn"><code>modulo math ... terminar</code><span>Módulo</span></div>
+<div class="fn"><code>importar math</code><span>Importar módulo</span></div>
+<div class="fn"><code>importar math como m</code><span>Import con alias</span></div>
+</section>
+<section id="memoria-estilo-c++"><h2>Memoria (estilo C++)</h2>
+<div class="fn"><code>memoria reservar 1024</code><span>Reservar buffer de N bytes</span></div>
+<div class="fn"><code>memoria liberar buf</code><span>Liberar buffer</span></div>
+<div class="fn"><code>memoria tamanio buf</code><span>Tamaño en bytes</span></div>
+<div class="fn"><code>memoria escribir buf 0 255</code><span>Escribir byte en offset</span></div>
+<div class="fn"><code>memoria leer buf 0</code><span>Leer byte en offset</span></div>
+<div class="fn"><code>memoria copiar dest orig 0 0 100</code><span>memcpy entre buffers</span></div>
+<div class="fn"><code>memoria mover dest orig 0 0 100</code><span>memmove</span></div>
+<div class="fn"><code>memoria rellenar buf 0 255 100</code><span>memset</span></div>
+<div class="fn"><code>memoria comparar a b 0 0 50</code><span>memcmp, retorna 0 si igual</span></div>
+<div class="fn"><code>memoria duplicar buf</code><span>Clonar buffer</span></div>
+<div class="fn"><code>memoria desde_lista buf lista</code><span>Cargar bytes desde lista</span></div>
+<div class="fn"><code>memoria a_lista buf</code><span>Exportar bytes a lista</span></div>
+<div class="fn"><code>memoria puntero buf 10</code><span>Sub-buffer desde offset</span></div>
+<div class="fn"><code>memoria alinear buf 8</code><span>Alinear a N bytes</span></div>
+<div class="fn"><code>memoria direccion buf</code><span>ID interno del buffer</span></div>
+<div class="fn"><code>memoria libre</code><span>Bytes libres del heap VS#</span></div>
+<div class="fn"><code>memoria recolectar</code><span>GC / liberar buffers huérfanos</span></div>
+<div class="fn"><code>bytes crear 256</code><span>Crear objeto bytes</span></div>
+<div class="fn"><code>bytes desde_texto "ABC"</code><span>Bytes desde string</span></div>
+<div class="fn"><code>bytes a_texto b</code><span>Bytes a string UTF-8</span></div>
+<div class="fn"><code>struct empaquetar "iif" 10 3.14 5</code><span>Pack binario</span></div>
+<div class="fn"><code>struct desempaquetar "iif" datos</code><span>Unpack binario</span></div>
+<div class="fn"><code>struct tamanio "iif"</code><span>Tamaño del formato</span></div>
+</section>
+<section id="hilos-y-concurrencia"><h2>Hilos y concurrencia</h2>
+<div class="fn"><code>tarea asincrona nombre ... terminar</code><span>Tarea async</span></div>
+<div class="fn"><code>esperar tarea nombre</code><span>Await tarea</span></div>
+<div class="fn"><code>en paralelo t1 t2 t3</code><span>Paralelo</span></div>
+<div class="fn"><code>hilo crear nombre ... terminar</code><span>Alias de tarea</span></div>
+<div class="fn"><code>mutex crear</code><span>Crear mutex</span></div>
+<div class="fn"><code>mutex bloquear m</code><span>Lock</span></div>
+<div class="fn"><code>mutex desbloquear m</code><span>Unlock</span></div>
+<div class="fn"><code>semaforo crear 5</code><span>Semáforo</span></div>
+<div class="fn"><code>semaforo esperar s</code><span>Wait</span></div>
+<div class="fn"><code>semaforo senalar s</code><span>Signal</span></div>
+<div class="fn"><code>canal crear</code><span>Canal async</span></div>
+<div class="fn"><code>canal enviar c valor</code><span>Send</span></div>
+<div class="fn"><code>canal recibir c</code><span>Receive</span></div>
+<div class="fn"><code>promesa crear</code><span>Promesa manual</span></div>
+<div class="fn"><code>promesa resolver p valor</code><span>Resolve</span></div>
+<div class="fn"><code>promesa rechazar p error</code><span>Reject</span></div>
+<div class="fn"><code>promesa esperar p</code><span>Await promise</span></div>
+</section>
+<section id="iteradores-y-generadores"><h2>Iteradores y generadores</h2>
+<div class="fn"><code>iterador crear lista</code><span>Iterador sobre lista</span></div>
+<div class="fn"><code>iterador siguiente it</code><span>Next (null si fin)</span></div>
+<div class="fn"><code>iterador tiene it</code><span>Has next</span></div>
+<div class="fn"><code>generador definir g ... terminar</code><span>Generador</span></div>
+<div class="fn"><code>generador producir valor</code><span>Yield</span></div>
+<div class="fn"><code>rango 1 100</code><span>Lista [1..100]</span></div>
+<div class="fn"><code>rango 0 10 paso 2</code><span>Rango con paso</span></div>
+<div class="fn"><code>enumerate lista</code><span>Lista de pares indice valor</span></div>
+<div class="fn"><code>zip lista1 lista2</code><span>Emparejar listas</span></div>
+<div class="fn"><code>mapa_funcion f lista</code><span>Map funcional</span></div>
+<div class="fn"><code>filtrar_funcion f lista</code><span>Filter funcional</span></div>
+</section>
+<section id="reflexión-y-tipos"><h2>Reflexión y tipos</h2>
+<div class="fn"><code>tipos de valor</code><span>typeof</span></div>
+<div class="fn"><code>tipos es_numero x</code><span>is number</span></div>
+<div class="fn"><code>tipos es_texto x</code><span>is string</span></div>
+<div class="fn"><code>tipos es_lista x</code><span>is array</span></div>
+<div class="fn"><code>tipos es_mapa x</code><span>is map</span></div>
+<div class="fn"><code>tipos es_funcion x</code><span>is function</span></div>
+<div class="fn"><code>tipos es_clase x</code><span>is class instance</span></div>
+<div class="fn"><code>tipos es_memoria x</code><span>is memory buffer</span></div>
+<div class="fn"><code>tipos nombre x</code><span>Type name string</span></div>
+<div class="fn"><code>reflexion variables scope</code><span>Listar variables</span></div>
+<div class="fn"><code>reflexion funciones</code><span>Listar funciones</span></div>
+<div class="fn"><code>reflexion llamar "fn" args</code><span>Call by name</span></div>
+<div class="fn"><code>reflexion evaluar "2 + 2"</code><span>Eval string (limitado)</span></div>
+<div class="fn"><code>reflexion codigo funcion f</code><span>Get source</span></div>
+</section>
+<section id="matematicas-mat"><h2>matematicas (mat)</h2>
+<div class="fn"><code>mat PI</code><span>Constante pi</span></div>
+<div class="fn"><code>mat E</code><span>Constante e</span></div>
+<div class="fn"><code>mat seno 45</code><span>Seno en grados</span></div>
+<div class="fn"><code>mat coseno 45</code><span>Coseno</span></div>
+<div class="fn"><code>mat tangente 45</code><span>Tangente</span></div>
+<div class="fn"><code>mat raiz 16</code><span>Raíz cuadrada</span></div>
+<div class="fn"><code>mat potencia 2 10</code><span>Potencia</span></div>
+<div class="fn"><code>mat log 100</code><span>Log natural</span></div>
+<div class="fn"><code>mat log10 100</code><span>Log base 10</span></div>
+<div class="fn"><code>mat absoluto -5</code><span>Valor absoluto</span></div>
+<div class="fn"><code>mat piso 3.7</code><span>Floor</span></div>
+<div class="fn"><code>mat techo 3.2</code><span>Ceil</span></div>
+<div class="fn"><code>mat redondear 3.6</code><span>Round</span></div>
+<div class="fn"><code>mat maximo a b</code><span>Max</span></div>
+<div class="fn"><code>mat minimo a b</code><span>Min</span></div>
+<div class="fn"><code>mat factorial 5</code><span>Factorial</span></div>
+<div class="fn"><code>mat aleatorio 1 100</code><span>Random int</span></div>
+<div class="fn"><code>mat hipotenusa 3 4</code><span>Hypot</span></div>
+<div class="fn"><code>mat grados 3.14</code><span>Rad to deg</span></div>
+<div class="fn"><code>mat radianes 180</code><span>Deg to rad</span></div>
+<div class="fn"><code>mat senh x</code><span>Sinh</span></div>
+<div class="fn"><code>mat cosh x</code><span>Cosh</span></div>
+<div class="fn"><code>mat tanh x</code><span>Tanh</span></div>
+<div class="fn"><code>mat signo -5</code><span>Sign</span></div>
+<div class="fn"><code>mat clamp x 0 10</code><span>Clamp/limitar</span></div>
+</section>
+<section id="texto-texto"><h2>Texto (texto)</h2>
+<div class="fn"><code>texto mayusculas s</code><span>Uppercase</span></div>
+<div class="fn"><code>texto minusculas s</code><span>Lowercase</span></div>
+<div class="fn"><code>texto capitalizar s</code><span>Capitalize</span></div>
+<div class="fn"><code>texto longitud s</code><span>Length</span></div>
+<div class="fn"><code>texto recortar s</code><span>Trim</span></div>
+<div class="fn"><code>texto subcadena s 0 5</code><span>Substring</span></div>
+<div class="fn"><code>texto buscar s "pat"</code><span>IndexOf</span></div>
+<div class="fn"><code>texto contiene s "x"</code><span>Includes</span></div>
+<div class="fn"><code>texto reemplazar s "a" "b"</code><span>Replace all</span></div>
+<div class="fn"><code>texto separar s ","</code><span>Split</span></div>
+<div class="fn"><code>texto unir lista ","</code><span>Join</span></div>
+<div class="fn"><code>texto repetir s 3</code><span>Repeat</span></div>
+<div class="fn"><code>texto invertir s</code><span>Reverse</span></div>
+<div class="fn"><code>texto rellenar s 10 "0"</code><span>Pad</span></div>
+<div class="fn"><code>texto es_numero s</code><span>Is numeric</span></div>
+<div class="fn"><code>texto a_numero s</code><span>Parse float</span></div>
+<div class="fn"><code>texto codificar_url s</code><span>encodeURI</span></div>
+<div class="fn"><code>texto decodificar_url s</code><span>decodeURI</span></div>
+<div class="fn"><code>texto normalizar s</code><span>Remove accents</span></div>
+<div class="fn"><code>texto hash s</code><span>Simple hash</span></div>
+</section>
+<section id="listas-lista"><h2>Listas (lista)</h2>
+<div class="fn"><code>lista agregar lst v</code><span>Append</span></div>
+<div class="fn"><code>lista quitar lst 0</code><span>Remove at index</span></div>
+<div class="fn"><code>lista obtener lst 0</code><span>Get index</span></div>
+<div class="fn"><code>lista tamanio lst</code><span>Length</span></div>
+<div class="fn"><code>lista ordenar lst</code><span>Sort asc</span></div>
+<div class="fn"><code>lista ordenar lst descendente</code><span>Sort desc</span></div>
+<div class="fn"><code>lista invertir lst</code><span>Reverse in place</span></div>
+<div class="fn"><code>lista mezclar lst</code><span>Shuffle</span></div>
+<div class="fn"><code>lista filtrar lst campo mayor 10</code><span>Filter</span></div>
+<div class="fn"><code>lista transformar lst fn</code><span>Map with function</span></div>
+<div class="fn"><code>lista reducir lst fn acc</code><span>Reduce</span></div>
+<div class="fn"><code>lista unico lst</code><span>Unique</span></div>
+<div class="fn"><code>lista zip a b</code><span>Zip two lists</span></div>
+<div class="fn"><code>lista agrupar lst "campo"</code><span>Group by</span></div>
+<div class="fn"><code>lista paginar lst 10 1</code><span>Page</span></div>
+<div class="fn"><code>lista aplanar lst</code><span>Flatten</span></div>
+<div class="fn"><code>lista contiene lst v</code><span>Contains</span></div>
+<div class="fn"><code>lista indice lst v</code><span>Index of</span></div>
+<div class="fn"><code>lista insertar lst 0 v</code><span>Insert at</span></div>
+<div class="fn"><code>lista copiar lst</code><span>Shallow copy</span></div>
+<div class="fn"><code>lista fusionar a b</code><span>Concat</span></div>
+<div class="fn"><code>lista sumar lst</code><span>Sum numbers</span></div>
+<div class="fn"><code>lista promedio lst</code><span>Average</span></div>
+</section>
+<section id="mapas-mapa"><h2>Mapas (mapa)</h2>
+<div class="fn"><code>mapa crear</code><span>New map</span></div>
+<div class="fn"><code>mapa poner m "k" v</code><span>Set key</span></div>
+<div class="fn"><code>mapa obtener m "k"</code><span>Get key</span></div>
+<div class="fn"><code>mapa quitar m "k"</code><span>Delete key</span></div>
+<div class="fn"><code>mapa contiene m "k"</code><span>Has key</span></div>
+<div class="fn"><code>mapa claves m</code><span>Keys</span></div>
+<div class="fn"><code>mapa valores m</code><span>Values</span></div>
+<div class="fn"><code>mapa tamanio m</code><span>Size</span></div>
+<div class="fn"><code>mapa limpiar m</code><span>Clear</span></div>
+<div class="fn"><code>mapa fusionar m1 m2</code><span>Merge</span></div>
+<div class="fn"><code>mapa invertir m</code><span>Swap keys/values</span></div>
+<div class="fn"><code>mapa a_lista m</code><span>Entries list</span></div>
+</section>
+<section id="conjuntos,-pilas,-colas"><h2>Conjuntos, pilas, colas</h2>
+<div class="fn"><code>conjunto crear</code><span>New set</span></div>
+<div class="fn"><code>conjunto agregar s v</code><span>Add</span></div>
+<div class="fn"><code>conjunto quitar s v</code><span>Remove</span></div>
+<div class="fn"><code>conjunto union a b</code><span>Union</span></div>
+<div class="fn"><code>conjunto interseccion a b</code><span>Intersection</span></div>
+<div class="fn"><code>conjunto diferencia a b</code><span>Difference</span></div>
+<div class="fn"><code>pila crear</code><span>Stack</span></div>
+<div class="fn"><code>pila apilar p v</code><span>Push</span></div>
+<div class="fn"><code>pila sacar p</code><span>Pop</span></div>
+<div class="fn"><code>cola crear</code><span>Queue</span></div>
+<div class="fn"><code>cola encolar q v</code><span>Enqueue</span></div>
+<div class="fn"><code>cola desencolar q</code><span>Dequeue</span></div>
+<div class="fn"><code>heap crear</code><span>Priority heap</span></div>
+<div class="fn"><code>heap insertar h prio val</code><span>Heap push</span></div>
+<div class="fn"><code>heap extraer h</code><span>Heap pop</span></div>
+<div class="fn"><code>heap mirar h</code><span>Peek min</span></div>
+</section>
+<section id="numeros-numero"><h2>Numeros (numero)</h2>
+<div class="fn"><code>numero binario 42</code><span>To binary string</span></div>
+<div class="fn"><code>numero hexadecimal 255</code><span>To hex</span></div>
+<div class="fn"><code>numero octal 64</code><span>To octal</span></div>
+<div class="fn"><code>numero limitar x 0 100</code><span>Clamp</span></div>
+<div class="fn"><code>numero redondear 3.14159 2</code><span>Round decimals</span></div>
+<div class="fn"><code>numero es par 4</code><span>Is even</span></div>
+<div class="fn"><code>numero es impar 3</code><span>Is odd</span></div>
+<div class="fn"><code>numero aleatorio decimal 0 1</code><span>Random float</span></div>
+<div class="fn"><code>numero a_binario_texto 5</code><span>Binary text</span></div>
+<div class="fn"><code>fraccion crear 1 3</code><span>Rational fraction</span></div>
+<div class="fn"><code>fraccion numerador f</code><span>Numerator</span></div>
+<div class="fn"><code>fraccion denominador f</code><span>Denominator</span></div>
+<div class="fn"><code>decimal crear 3.14159 10</code><span>High precision decimal</span></div>
+</section>
+<section id="archivos-archivo"><h2>Archivos (archivo)</h2>
+<div class="fn"><code>archivo escribir "ruta" "cont"</code><span>Write file (localStorage)</span></div>
+<div class="fn"><code>archivo leer "ruta"</code><span>Read file</span></div>
+<div class="fn"><code>archivo leer lineas "ruta"</code><span>Read lines</span></div>
+<div class="fn"><code>archivo agregar "ruta" "x"</code><span>Append</span></div>
+<div class="fn"><code>archivo existe "ruta"</code><span>Exists</span></div>
+<div class="fn"><code>archivo borrar "ruta"</code><span>Delete</span></div>
+<div class="fn"><code>archivo copiar orig dest</code><span>Copy</span></div>
+<div class="fn"><code>archivo mover orig dest</code><span>Rename/move</span></div>
+<div class="fn"><code>archivo listar</code><span>List all files</span></div>
+<div class="fn"><code>archivo tamanio "ruta"</code><span>File size</span></div>
+<div class="fn"><code>subir archivo</code><span>Upload dialog</span></div>
+</section>
+<section id="red-red"><h2>Red (red)</h2>
+<div class="fn"><code>red obtener "url"</code><span>HTTP GET</span></div>
+<div class="fn"><code>red enviar "url" datos "POST"</code><span>HTTP POST</span></div>
+<div class="fn"><code>red publicar "url" body</code><span>POST</span></div>
+<div class="fn"><code>red editar "url" body</code><span>PUT</span></div>
+<div class="fn"><code>red borrar "url"</code><span>DELETE</span></div>
+<div class="fn"><code>red cabecera "Auth" "token"</code><span>Set header</span></div>
+<div class="fn"><code>red json "url"</code><span>GET JSON</span></div>
+<div class="fn"><code>red descargar "url"</code><span>Download text</span></div>
+<div class="fn"><code>red codigo "url"</code><span>Status code only</span></div>
+<div class="fn"><code>websocket conectar "wss://..."</code><span>WebSocket connect</span></div>
+<div class="fn"><code>websocket enviar "msg"</code><span>WS send</span></div>
+<div class="fn"><code>socket crear "host" 8080</code><span>Socket stub</span></div>
+</section>
+<section id="tiempo-tiempo"><h2>Tiempo (tiempo)</h2>
+<div class="fn"><code>tiempo ahora</code><span>Current datetime</span></div>
+<div class="fn"><code>tiempo unix</code><span>Unix timestamp</span></div>
+<div class="fn"><code>tiempo milisegundos</code><span>Ms since epoch</span></div>
+<div class="fn"><code>tiempo sumar "2026-01-01" dias 7</code><span>Add time</span></div>
+<div class="fn"><code>tiempo diferencia f1 f2</code><span>Diff days</span></div>
+<div class="fn"><code>tiempo formatear t "DD/MM/YYYY"</code><span>Format date</span></div>
+<div class="fn"><code>tiempo dia</code><span>Weekday name</span></div>
+<div class="fn"><code>tiempo mes</code><span>Month name</span></div>
+<div class="fn"><code>tiempo cronometro iniciar</code><span>Start stopwatch</span></div>
+<div class="fn"><code>tiempo cronometro leer</code><span>Read stopwatch ms</span></div>
+<div class="fn"><code>tiempo dormir 1000</code><span>Sleep ms</span></div>
+</section>
+<section id="cripto-y-hash"><h2>Cripto y hash</h2>
+<div class="fn"><code>crypto hash "text" "sha256"</code><span>SHA hash</span></div>
+<div class="fn"><code>crypto uuid</code><span>UUID v4</span></div>
+<div class="fn"><code>crypto base64 codificar s</code><span>Base64 encode</span></div>
+<div class="fn"><code>crypto base64 decodificar s</code><span>Base64 decode</span></div>
+<div class="fn"><code>hash sha256 "text"</code><span>SHA256</span></div>
+<div class="fn"><code>hash sha512 "text"</code><span>SHA512</span></div>
+<div class="fn"><code>hash md5 "text"</code><span>MD5</span></div>
+<div class="fn"><code>cifrar aes data "key"</code><span>AES encrypt</span></div>
+<div class="fn"><code>descifrar aes data "key"</code><span>AES decrypt</span></div>
+<div class="fn"><code>jwt crear payload "secret"</code><span>Create JWT</span></div>
+<div class="fn"><code>jwt verificar token "secret"</code><span>Verify JWT</span></div>
+</section>
+<section id="serialización"><h2>Serialización</h2>
+<div class="fn"><code>json desde texto s</code><span>Parse JSON</span></div>
+<div class="fn"><code>json guardar "k" obj</code><span>Save to storage</span></div>
+<div class="fn"><code>json cargar "k"</code><span>Load from storage</span></div>
+<div class="fn"><code>serializar obj</code><span>Serialize to JSON string</span></div>
+<div class="fn"><code>deserializar s</code><span>Parse JSON</span></div>
+<div class="fn"><code>serializar binario obj</code><span>Binary serialize</span></div>
+<div class="fn"><code>deserializar binario data</code><span>Binary parse</span></div>
+<div class="fn"><code>almacen guardar "k" v</code><span>Key-value store</span></div>
+<div class="fn"><code>almacen leer "k"</code><span>Read store</span></div>
+</section>
+<section id="ui-y-ventanas"><h2>UI y ventanas</h2>
+<div class="fn"><code>ventana crear "Título" 800 600</code><span>Create app window</span></div>
+<div class="fn"><code>ventana cerrar</code><span>Close window</span></div>
+<div class="fn"><code>pestana crear "id"</code><span>Tab container</span></div>
+<div class="fn"><code>pestana agregar "id" "Tab1"</code><span>Add tab</span></div>
+<div class="fn"><code>pestana cambiar "id" 0</code><span>Switch tab</span></div>
+<div class="fn"><code>ui panel crear "id"</code><span>Panel</span></div>
+<div class="fn"><code>ui boton crear "id" padre "Texto"</code><span>Button</span></div>
+<div class="fn"><code>ui entrada crear "id" padre "hint"</code><span>Input</span></div>
+<div class="fn"><code>tabla crear "id" 5 3</code><span>Table</span></div>
+<div class="fn"><code>dom texto "id" "val"</code><span>Set DOM text</span></div>
+<div class="fn"><code>dom crear "div" padre "id"</code><span>Create element</span></div>
+</section>
+<section id="gráficos-y-3d"><h2>Gráficos y 3D</h2>
+<div class="fn"><code>grafico crear 800 600</code><span>2D canvas</span></div>
+<div class="fn"><code>grafico rectangulo x y w h color</code><span>Draw rect</span></div>
+<div class="fn"><code>grafico circulo x y r color</code><span>Draw circle</span></div>
+<div class="fn"><code>grafico linea x1 y1 x2 y2 color</code><span>Draw line</span></div>
+<div class="fn"><code>escena iniciar</code><span>Start 3D Void engine</span></div>
+<div class="fn"><code>malla cubo crear "id"</code><span>Create cube</span></div>
+<div class="fn"><code>camara posicion 0 5 10</code><span>Camera pos</span></div>
+<div class="fn"><code>luz sol crear 1 1 -1</code><span>Sun light</span></div>
+<div class="fn"><code>fisica gravedad 9.8</code><span>Physics gravity</span></div>
+</section>
+<section id="sistema-sistema"><h2>Sistema (sistema)</h2>
+<div class="fn"><code>sistema hora</code><span>Current time</span></div>
+<div class="fn"><code>sistema fecha</code><span>Current date</span></div>
+<div class="fn"><code>sistema uuid</code><span>UUID</span></div>
+<div class="fn"><code>sistema plataforma</code><span>OS platform</span></div>
+<div class="fn"><code>sistema memoria</code><span>Heap usage</span></div>
+<div class="fn"><code>sistema copiar_portapapeles txt</code><span>Clipboard</span></div>
+<div class="fn"><code>sistema notificar "msg"</code><span>Notification</span></div>
+<div class="fn"><code>sistema limpiar</code><span>Clear console</span></div>
+<div class="fn"><code>sistema argumentos</code><span>Program args (stub)</span></div>
+<div class="fn"><code>sistema entorno "PATH"</code><span>Env var (stub)</span></div>
+<div class="fn"><code>sistema ejecutar "cmd"</code><span>Run command (stub)</span></div>
+<div class="fn"><code>sistema salir</code><span>Exit</span></div>
+<div class="fn"><code>gc ejecutar</code><span>Garbage collect</span></div>
+<div class="fn"><code>gc contar</code><span>Count tracked objects</span></div>
+</section>
+<section id="rutas-ruta"><h2>Rutas (ruta)</h2>
+<div class="fn"><code>ruta unir "a" "b"</code><span>Join paths</span></div>
+<div class="fn"><code>ruta nombre "path/file.txt"</code><span>Basename</span></div>
+<div class="fn"><code>ruta directorio "path/file.txt"</code><span>Dirname</span></div>
+<div class="fn"><code>ruta extension "file.txt"</code><span>Extension</span></div>
+<div class="fn"><code>ruta existe "path"</code><span>Path exists</span></div>
+<div class="fn"><code>ruta absoluta "rel"</code><span>Absolute path</span></div>
+<div class="fn"><code>ruta normalizar "a/../b"</code><span>Normalize</span></div>
+<div class="fn"><code>glob buscar "*.txt"</code><span>Glob pattern</span></div>
+</section>
+<section id="compresión-y-xml"><h2>Compresión y XML</h2>
+<div class="fn"><code>comprimir gzip "text"</code><span>Gzip compress</span></div>
+<div class="fn"><code>comprimir descomprimir data</code><span>Gunzip</span></div>
+<div class="fn"><code>comprimir zip agregar "f.txt" data</code><span>Zip add</span></div>
+<div class="fn"><code>comprimir zip extraer data</code><span>Zip extract</span></div>
+<div class="fn"><code>xml parsear "<a/>"</code><span>Parse XML to map</span></div>
+<div class="fn"><code>xml crear "root"</code><span>Create XML node</span></div>
+<div class="fn"><code>html parsear s</code><span>Parse HTML to map</span></div>
+<div class="fn"><code>html limpiar s</code><span>Strip HTML tags</span></div>
+</section>
+<section id="pruebas-prueba"><h2>Pruebas (prueba)</h2>
+<div class="fn"><code>prueba afirmar cond</code><span>Assert true</span></div>
+<div class="fn"><code>prueba igual a b</code><span>Assert equal</span></div>
+<div class="fn"><code>prueba distinto a b</code><span>Assert not equal</span></div>
+<div class="fn"><code>prueba mayor a b</code><span>Assert greater</span></div>
+<div class="fn"><code>prueba contiene lst v</code><span>Assert contains</span></div>
+<div class="fn"><code>prueba lanza funcion</code><span>Assert throws</span></div>
+<div class="fn"><code>prueba resumen</code><span>Print test summary</span></div>
+</section>
+<section id="matriz-y-arreglo"><h2>Matriz y arreglo</h2>
+<div class="fn"><code>matriz crear 3 4</code><span>3x4 matrix</span></div>
+<div class="fn"><code>matriz obtener m fil col</code><span>Get cell</span></div>
+<div class="fn"><code>matriz poner m fil col val</code><span>Set cell</span></div>
+<div class="fn"><code>matriz filas m</code><span>Row count</span></div>
+<div class="fn"><code>matriz columnas m</code><span>Col count</span></div>
+<div class="fn"><code>matriz transponer m</code><span>Transpose</span></div>
+<div class="fn"><code>matriz multiplicar a b</code><span>Matrix multiply</span></div>
+<div class="fn"><code>matriz identidad 3</code><span>Identity matrix</span></div>
+<div class="fn"><code>arreglo crear 256 0</code><span>Typed array</span></div>
+<div class="fn"><code>arreglo tamanio arr</code><span>Array length</span></div>
+</section>
+<section id="grafos"><h2>Grafos</h2>
+<div class="fn"><code>grafo crear</code><span>New graph</span></div>
+<div class="fn"><code>grafo nodo g "A"</code><span>Add node</span></div>
+<div class="fn"><code>grafo arista g "A" "B" 1</code><span>Add weighted edge</span></div>
+<div class="fn"><code>grafo vecinos g "A"</code><span>Neighbors</span></div>
+<div class="fn"><code>grafo dfs g "A"</code><span>DFS order</span></div>
+<div class="fn"><code>grafo bfs g "A"</code><span>BFS order</span></div>
+<div class="fn"><code>grafo camino g "A" "B"</code><span>Shortest path</span></div>
+</section>
+<section id="regex-y-validación"><h2>Regex y validación</h2>
+<div class="fn"><code>regex buscar s pat</code><span>First match</span></div>
+<div class="fn"><code>regex buscar_todos s pat</code><span>All matches</span></div>
+<div class="fn"><code>regex reemplazar s pat rep</code><span>Replace</span></div>
+<div class="fn"><code>regex prueba s pat</code><span>Test match</span></div>
+<div class="fn"><code>regex dividir s pat</code><span>Split by regex</span></div>
+<div class="fn"><code>validar correo s</code><span>Validate email</span></div>
+<div class="fn"><code>validar url s</code><span>Validate URL</span></div>
+<div class="fn"><code>validar numero s</code><span>Validate number</span></div>
+<div class="fn"><code>validar fecha s</code><span>Validate date</span></div>
+</section>
+<section id="ia"><h2>IA</h2>
+<div class="fn"><code>ia clave gratis</code><span>Free AI mode</span></div>
+<div class="fn"><code>ia enviar "prompt"</code><span>Send to AI</span></div>
+<div class="fn"><code>ia respuesta</code><span>Last AI response</span></div>
+<div class="fn"><code>ia contexto verdadero</code><span>Enable memory</span></div>
+<div class="fn"><code>ia reset</code><span>Clear AI history</span></div>
+</section>
+<section id="eventos"><h2>Eventos</h2>
+<div class="fn"><code>al presionar tecla "Enter"</code><span>Keydown handler</span></div>
+<div class="fn"><code>al soltar tecla "Escape"</code><span>Keyup handler</span></div>
+<div class="fn"><code>al hacer clic</code><span>Click handler</span></div>
+<div class="fn"><code>al clic boton "id"</code><span>Button click</span></div>
+<div class="fn"><code>al escribir consola var</code><span>Console input</span></div>
+<div class="fn"><code>al juego actualizar</code><span>Game loop</span></div>
+<div class="fn"><code>temporizador cada 1000</code><span>Interval timer</span></div>
+<div class="fn"><code>evento iniciar con</code><span>Main event</span></div>
+</section>
+<section id="avanzado"><h2>Avanzado</h2>
+<div class="fn"><code>pipe x fn1 fn2 fn3</code><span>Pipeline</span></div>
+<div class="fn"><code>cache guardar "k" v 60000</code><span>TTL cache</span></div>
+<div class="fn"><code>log info "msg"</code><span>Logging</span></div>
+<div class="fn"><code>reintentar 3 funcion</code><span>Retry N times</span></div>
+<div class="fn"><code>js abrir ... js cerrar</code><span>Native JS block</span></div>
+<div class="fn"><code>depurar var1 var2</code><span>Debug print</span></div>
+<div class="fn"><code>inspeccionar x</code><span>Inspect variable</span></div>
+<div class="fn"><code>operador sumar</code><span>Functional +</span></div>
+<div class="fn"><code>operador map f</code><span>Functional map</span></div>
+<div class="fn"><code>codificacion utf8 s</code><span>UTF-8 encode</span></div>
+<div class="fn"><code>codificacion base32 s</code><span>Base32</span></div>
+<div class="fn"><code>bisect buscar lst v</code><span>Binary search</span></div>
+<div class="fn"><code>bisect insertar lst v</code><span>Insert sorted</span></div>
+</section>
+</main></body></html>
