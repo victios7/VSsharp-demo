@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VS# | Lenguaje de programación en español</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Inter:wght@300;400;600;800&display=swap');
+
+        :root {
+            --bg: #0a0a1e;
+            --bg-panel: #12122b;
+            --bg-code: #1a1a2e;
+            --accent: #FF5500;
+            --accent-2: #00D9FF;
+            --text: #E4E4FF;
+            --text-dim: #8B8BAE;
+            --green: #00FF88;
+            --purple: #B565FF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Fondo animado tipo IDE */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,85,0,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,85,0,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
+        .glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            z-index: 0;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .glow.orange { background: var(--accent); top: -200px; left: -200px; }
+        .glow.blue { background: var(--accent-2); bottom: -200px; right: -200px; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 50px) scale(1.1); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            text-shadow: 0 0 40px rgba(255,85,0,0.5);
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--text-dim);
+            font-weight: 300;
+        }
+
+        .badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 6px 16px;
+            background: rgba(0,255,136,0.1);
+            border: 1px solid var(--green);
+            border-radius: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--green);
+        }
+
+        /* Code Window */
+        .code-window {
+            background: var(--bg-panel);
+            border-radius: 12px;
+            border: 1px solid rgba(255,85,0,0.2);
+            overflow: hidden;
+            margin-bottom: 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .window-bar {
+            background: var(--bg-code);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid rgba(255,85,0,0.1);
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot.red { background: #FF5F56; }
+        .dot.yellow { background: #FFBD2E; }
+        .dot.green { background: #27C93F; }
+
+        .filename {
+            margin-left: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .code-content {
+            padding: 30px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            background: var(--bg-code);
+        }
+
+        .code-line {
+            opacity: 0;
+            animation: typeIn 0.5s ease forwards;
+        }
+
+        .code-line:nth-child(1) { animation-delay: 0.5s; }
+        .code-line:nth-child(2) { animation-delay: 0.7s; }
+        .code-line:nth-child(3) { animation-delay: 0.9s; }
+        .code-line:nth-child(4) { animation-delay: 1.1s; }
+        .code-line:nth-child(5) { animation-delay: 1.3s; }
+
+        @keyframes typeIn {
+            to { opacity: 1; }
+        }
+
+        .keyword { color: var(--purple); font-weight: 600; }
+        .string { color: var(--green); }
+        .function { color: var(--accent-2); }
+        .comment { color: var(--text-dim); font-style: italic; }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: var(--bg-panel);
+            border: 1px solid rgba(255,85,0,0.15);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease both;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.4s; }
+        .feature-card:nth-child(2) { animation-delay: 0.5s; }
+        .feature-card:nth-child(3) { animation-delay: 0.6s; }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 40px rgba(255,85,0,0.2);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .feature-desc {
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        /* Buttons */
+        .download-section {
+            text-align: center;
+            animation: fadeInUp 0.8s ease 0.8s both;
+        }
+
+        .download-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            position: relative;
+            padding: 18px 45px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-html {
+            background: linear-gradient(135deg, var(--accent-2), #0099CC);
+            color: var(--bg);
+            box-shadow: 0 10px 30px rgba(0,217,255,0.3);
+        }
+
+        .btn-html:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,217,255,0.5);
+        }
+
+        .btn-exe {
+            background: linear-gradient(135deg, var(--accent), #CC4400);
+            color: white;
+            box-shadow: 0 10px 30px rgba(255,85,0,0.3);
+        }
+
+        .btn-exe:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255,85,0,0.5);
+        }
+
+        .btn-icon {
+            font-size: 1.3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .version {
+            margin-top: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,85,0,0.1);
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .logo { font-size: 2.5rem; }
+            .tagline { font-size: 1rem; }
+            .buttons { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="glow orange"></div>
+    <div class="glow blue"></div>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="logo">VS#</h1>
+            <p class="tagline">Lenguaje de programación en español</p>
+            <span class="badge">v4.5 • En desarrollo activo</span>
+        </header>
+
+        <div class="code-window">
+            <div class="window-bar">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+                <span class="filename">hola_mundo.vs#</span>
+            </div>
+            <div class="code-content">
+                <div class="code-line"><span class="keyword">vs#</span></div>
+                <div class="code-line"><span class="comment"># Mi primer programa en VS#</span></div>
+                <div class="code-line"><span class="keyword">variable</span> nombre = <span class="function">leer</span> <span class="string">"¿Cómo te llamas?"</span></div>
+                <div class="code-line"><span class="function">mostrar</span> <span class="keyword">unir</span> <span class="string">"¡Hola, "</span> nombre <span class="string">"!"</span></div>
+                <div class="code-line"><span class="function">mostrar</span> <span class="string">"Bienvenido a VS#"</span></div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3 class="feature-title">Sintaxis Clara</h3>
+                <p class="feature-desc">Palabras clave en español. Sin símbolos raros. Ideal para aprender a programar desde cero.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Volt + VS++</h3>
+                <p class="feature-desc">Integra JavaScript con Volt y acelera con C++/WASM en VS++ para rendimiento nativo.(volt y vs++ se están desarollando es separado junto a photon)</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎮</div>
+                <h3 class="feature-title">VOID Engine 3D</h3>
+                <p class="feature-desc">Motor 3D integrado con física, materiales PBR y WebGPU. Crea juegos sin salir de VS#.</p>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <h2 class="download-title">Descarga VS#</h2>
+            <div class="buttons">
+                <a href="downloads/vs-editor.html" download class="btn btn-html">
+                    <span class="btn-icon">🌐</span>
+                    <span>Descargar HTML</span>
+                </a>
+                <a href="downloads/vs-editor.exe" download class="btn btn-exe">
+                    <span class="btn-icon">💻</span>
+                    <span>Descargar EXE</span>
+                </a>
+            </div>
+            <p class="version">Versión 6.0 • 15 MB • Windows 10/11</p>
+        </div>
+
+        <footer class="footer">
+            <p>VS# es software libre MIT • Creado por Victios7 • 2026</p>
+            <p>VOID Engine basado en Babylon.js</p>
+        </footer>
+    </div>
+</body>
+</html>
